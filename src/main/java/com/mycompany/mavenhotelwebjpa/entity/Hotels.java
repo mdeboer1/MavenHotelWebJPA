@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.mavenjpamodelcreator.entities;
+package com.mycompany.mavenhotelwebjpa.entity;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author markr_000
+ * @author mdeboer1
  */
 @Entity
 @Table(name = "hotels")

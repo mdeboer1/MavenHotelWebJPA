@@ -4,7 +4,7 @@
     Author     : mdeboer1
 --%>
 
-<%@page import="hotel.web.model.Hotel"%>
+
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -68,10 +68,10 @@
                                             <!--li class="list-group-item"-->
                                             <tr>
                                                 <td><a href="control?id=${hotel.hotelId}">${hotel.hotelName}</a></td>
-                                                <td>${hotel.address}</td>
-                                                <td>${hotel.city}</td>
-                                                <td>${hotel.state}</td>
-                                                <td>${hotel.zip}</td>
+                                                <td>${hotel.hotelAddress}</td>
+                                                <td>${hotel.hotelCity}</td>
+                                                <td>${hotel.hotelState}</td>
+                                                <td>${hotel.hotelZip}</td>
                                             </tr>
                                         </c:forEach>
                                     <!--/ul-->

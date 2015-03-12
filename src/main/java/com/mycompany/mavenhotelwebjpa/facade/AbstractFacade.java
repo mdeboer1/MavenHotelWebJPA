@@ -7,10 +7,12 @@ package com.mycompany.mavenhotelwebjpa.facade;
 
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**
  *
- * @author markr_000
+ * @author mdeboer1
  */
 public abstract class AbstractFacade<T> {
     private Class<T> entityClass;
@@ -42,6 +44,8 @@ public abstract class AbstractFacade<T> {
         cq.select(cq.from(entityClass));
         return getEntityManager().createQuery(cq).getResultList();
     }
+    
+    
 
     public List<T> findRange(int[] range) {
         javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();

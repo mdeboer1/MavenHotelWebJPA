@@ -24,11 +24,7 @@
         <param-name>db.password</param-name>
         <param-value>admin</param-value>
     </context-param>
-    <listener>
-        <listener-class>
-            hotel.web.events.MyServletContextListener
-        </listener-class>
-    </listener>
+    
     <servlet>
         <servlet-name>hotelcontroller</servlet-name>
         <servlet-class>com.mycompany.mavenhotelwebjpa.controller.HotelController</servlet-class>
