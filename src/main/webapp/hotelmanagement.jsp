@@ -35,7 +35,6 @@
                 <div id="lookupWizard">
                     <fieldset>
                         <legend>Filter Hotels</legend>
-                        <input id="byId" name="byId" type="text" class="form-control" placeholder="Look up by id">
                         <input id="byName" name="byName" type="text" class="form-control" placeholder="Look up by name">
                         <input id="byAddress" name="byAddress" type="text" class="form-control" placeholder="Look up by address">
                         <input id="byCity" name="byCity" type="text" class="form-control" placeholder="Look up by city">

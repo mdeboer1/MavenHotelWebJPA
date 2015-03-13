@@ -57,14 +57,13 @@ public class HotelController extends HttpServlet {
         String hotelId = request.getParameter("hotelId");
         HttpSession session = request.getSession();
         String filter = request.getParameter("filter");
-        String hId = request.getParameter("byId");
         String hotelName = request.getParameter("byName");
         String hotelAddress = request.getParameter("byAddress");
         String hotelCity = request.getParameter("byCity");
         String hotelState = request.getParameter("byState");
         String hotelZip = request.getParameter("byZip");
         String allHotels = request.getParameter("allHotels");
-        HttpSession session3 = request.getSession();
+        HttpSession session1 = request.getSession();
         
         // This section is for the Lookup Wizard        
         if (filter != null){
@@ -73,41 +72,53 @@ public class HotelController extends HttpServlet {
             if (allHotels != null){
                 hotelList = hotelsFacade.findAll();
             }
-            if (!hId.isEmpty()){
-                columnName = "hotel_id";
-                propertyName = hotelId;
-            }
             else if (!hotelName.isEmpty()){
                 columnName = "hotel_name";
-                propertyName = hotelName;
             }
             else if (!hotelAddress.isEmpty()){
                 columnName = "hotel_address";
-                propertyName = hotelAddress;
             }
             else if (!hotelCity.isEmpty()){
                 columnName = "hotel_city";
-                propertyName = hotelCity;
             }
             else if (!hotelState.isEmpty()){
                 columnName = "hotel_state";
-                propertyName = hotelState;
             }
             else if (!hotelZip.isEmpty()){
                 columnName = "hotel_zip";
-                propertyName = hotelZip;
-            }
+           }
             if (allHotels == null){
-                hotelList = hotelsFacade.findAllByColumnName(columnName, propertyName);
+                //columnName = "h." + columnName;
+                hotelList = hotelsFacade.findAllByColumnName(columnName);
             }
             request.setAttribute("hotelNameList", hotelList);
-            session3.setAttribute("hotelNameList", hotelList);
+            session1.setAttribute("hotelNameList", hotelList);
         } 
         
+        String[] query = request.getParameterValues("id");
+        int id;
+        Hotels hotel = null;
         
-        
-        hotelList = hotelsFacade.findAll();
-        request.setAttribute("hotelNameList", hotelList);
+        if (query != null){
+            try {
+                id = Integer.parseInt(query[0]);
+                String propertyName = id +"";
+                hotelList = hotelsFacade.findAllByColumnName(propertyName);
+                for(Hotels h : hotelList){
+                    if (id == h.getHotelId()){
+                        hotel = h;
+                    }
+                }
+                request.setAttribute("hotelToEdit", hotel);
+            } catch (NumberFormatException e){
+
+            }
+        }
+
+        if (null == session.getAttribute("hotelNameList")){
+            hotelList = hotelsFacade.findAll();
+            request.setAttribute("hotelNameList", hotelList);
+        }
         
         RequestDispatcher view =
             request.getRequestDispatcher(response.encodeURL(RESULT_PAGE));
