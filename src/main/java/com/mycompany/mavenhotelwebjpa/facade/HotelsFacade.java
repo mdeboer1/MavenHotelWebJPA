@@ -63,7 +63,7 @@ public class HotelsFacade extends AbstractFacade<Hotels> {
             criteriaQuery.where(builder.like(hotel.get(Hotels_.hotelAddress),searchKey));
             q = getEntityManager().createQuery(criteriaQuery);
             hotels = q.getResultList();
-            
+            }
             if (hotels.isEmpty()){
 
             criteriaQuery.where(builder.like(hotel.get(Hotels_.hotelCity),searchKey));
@@ -83,7 +83,7 @@ public class HotelsFacade extends AbstractFacade<Hotels> {
                 q = getEntityManager().createQuery(criteriaQuery);
                 hotels = q.getResultList();
             }
-        }
+        
         
         return hotels;
     

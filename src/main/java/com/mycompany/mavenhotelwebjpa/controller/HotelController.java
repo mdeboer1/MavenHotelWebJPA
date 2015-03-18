@@ -54,7 +54,7 @@ public class HotelController extends HttpServlet {
         String newHotelCity = request.getParameter("editCity");
         String newHotelState = request.getParameter("editState");
         String newHotelZip = request.getParameter("editZip");
-        String hotelId = request.getParameter("hotelId");
+        
         HttpSession session = request.getSession();
         String filter = request.getParameter("filter");
         String hotelName = request.getParameter("byName");
@@ -64,28 +64,33 @@ public class HotelController extends HttpServlet {
         String hotelZip = request.getParameter("byZip");
         String allHotels = request.getParameter("allHotels");
         HttpSession session1 = request.getSession();
+        String editHotelName = request.getParameter("editName");
+        String editHotelAddress = request.getParameter("editAddress");
+        String editHotelCity = request.getParameter("editCity");
+        String editHotelState = request.getParameter("editState");
+        String editHotelZip = request.getParameter("editZip");
         
         // This section is for the Lookup Wizard        
         if (filter != null){
             String columnName = null;
-            String propertyName = null;
+            //String propertyName = null;
             if (allHotels != null){
                 hotelList = hotelsFacade.findAll();
             }
             else if (!hotelName.isEmpty()){
-                columnName = "hotel_name";
+                columnName = request.getParameter("byName");
             }
             else if (!hotelAddress.isEmpty()){
-                columnName = "hotel_address";
+                columnName = request.getParameter("byAddress");
             }
             else if (!hotelCity.isEmpty()){
-                columnName = "hotel_city";
+                columnName = request.getParameter("byCity");
             }
             else if (!hotelState.isEmpty()){
-                columnName = "hotel_state";
+                columnName = request.getParameter("byState");
             }
             else if (!hotelZip.isEmpty()){
-                columnName = "hotel_zip";
+                columnName = request.getParameter("byZip");
            }
             if (allHotels == null){
                 //columnName = "h." + columnName;
@@ -141,9 +146,10 @@ public class HotelController extends HttpServlet {
         
         if (edit != null){
             try{
-                hotel = new Hotels(44, newHotelName, newHotelAddress, newHotelCity,
-                    newHotelState, newHotelZip);
-            }catch (NullPointerException e){
+                int hotelId = Integer.parseInt(request.getParameter("hotelId"));
+                hotel = new Hotels(hotelId, editHotelName, editHotelAddress, editHotelCity,
+                    editHotelState, editHotelZip);
+            }catch (NullPointerException | NumberFormatException e){
                 
             }
             hotelsFacade.edit(hotel);
@@ -153,9 +159,10 @@ public class HotelController extends HttpServlet {
         
         if (delete != null){
             try{
-                hotel = new Hotels(44, newHotelName, newHotelAddress, newHotelCity,
-                    newHotelState, newHotelZip);
-            }catch (NullPointerException e){
+                int hotelId = Integer.parseInt(request.getParameter("hotelId"));
+                hotel = new Hotels(hotelId, editHotelName, editHotelAddress, editHotelCity,
+                    editHotelState, editHotelZip);
+            }catch (NullPointerException | NumberFormatException e){
                 
             }
             hotelsFacade.remove(hotel);
