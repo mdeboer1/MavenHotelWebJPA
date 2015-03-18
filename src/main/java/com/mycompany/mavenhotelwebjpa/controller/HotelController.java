@@ -46,12 +46,12 @@ public class HotelController extends HttpServlet {
         List<Hotels> hotelList = new ArrayList<>();
         String edit = request.getParameter("editHotel");
         String delete = request.getParameter("deleteHotel");
-        String addHotel = request.getParameter("addToList");
-        String newHotelName = request.getParameter("editName");
-        String newHotelAddress = request.getParameter("editAddress");
-        String newHotelCity = request.getParameter("editCity");
-        String newHotelState = request.getParameter("editState");
-        String newHotelZip = request.getParameter("editZip");
+        String addHotel = request.getParameter("add");
+        String newHotelName = request.getParameter("addName");
+        String newHotelAddress = request.getParameter("addAddress");
+        String newHotelCity = request.getParameter("addCity");
+        String newHotelState = request.getParameter("addState");
+        String newHotelZip = request.getParameter("addZip");
         
         HttpSession session = request.getSession();
         String filter = request.getParameter("filter");
@@ -168,7 +168,7 @@ public class HotelController extends HttpServlet {
         
         if (addHotel != null){
             try{
-                hotel = new Hotels(44, newHotelName, newHotelAddress, newHotelCity,
+                hotel = new Hotels(1, newHotelName, newHotelAddress, newHotelCity,
                     newHotelState, newHotelZip);
             }catch (NullPointerException e){
                 
