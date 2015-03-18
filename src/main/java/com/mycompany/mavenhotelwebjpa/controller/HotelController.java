@@ -95,15 +95,39 @@ public class HotelController extends HttpServlet {
             session1.setAttribute("hotelNameList", hotelList);
         } 
         
+//        String[] query = request.getParameterValues("id");
+//        int id;
+//        Hotels hotel = null;
+//        
+//        if (query != null){
+//            try {
+//                id = Integer.parseInt(query[0]);
+//                String propertyName = id +"";
+//                hotelList = hotelsFacade.findAllByColumnName(propertyName);
+//                for(Hotels h : hotelList){
+//                    if (id == h.getHotelId()){
+//                        hotel = h;
+//                    }
+//                }
+//                request.setAttribute("hotelToEdit", hotel);
+//            } catch (NumberFormatException e){
+//
+//            }
+//        }
+        
+        
+
+        if (null == session.getAttribute("hotelNameList")){
+            hotelList = hotelsFacade.findAll();
+            request.setAttribute("hotelNameList", hotelList);
+        }
+        
         String[] query = request.getParameterValues("id");
-        int id;
         Hotels hotel = null;
         
         if (query != null){
             try {
-                id = Integer.parseInt(query[0]);
-                String propertyName = id +"";
-                hotelList = hotelsFacade.findAllByColumnName(propertyName);
+                int id = Integer.parseInt(query[0]);
                 for(Hotels h : hotelList){
                     if (id == h.getHotelId()){
                         hotel = h;
@@ -114,8 +138,39 @@ public class HotelController extends HttpServlet {
 
             }
         }
-
-        if (null == session.getAttribute("hotelNameList")){
+        
+        if (edit != null){
+            try{
+                hotel = new Hotels(44, newHotelName, newHotelAddress, newHotelCity,
+                    newHotelState, newHotelZip);
+            }catch (NullPointerException e){
+                
+            }
+            hotelsFacade.edit(hotel);
+            hotelList = hotelsFacade.findAll();
+            request.setAttribute("hotelNameList", hotelList);
+        }
+        
+        if (delete != null){
+            try{
+                hotel = new Hotels(44, newHotelName, newHotelAddress, newHotelCity,
+                    newHotelState, newHotelZip);
+            }catch (NullPointerException e){
+                
+            }
+            hotelsFacade.remove(hotel);
+            hotelList = hotelsFacade.findAll();
+            request.setAttribute("hotelNameList", hotelList);
+        }
+        
+        if (addHotel != null){
+            try{
+                hotel = new Hotels(44, newHotelName, newHotelAddress, newHotelCity,
+                    newHotelState, newHotelZip);
+            }catch (NullPointerException e){
+                
+            }
+            hotelsFacade.create(hotel);
             hotelList = hotelsFacade.findAll();
             request.setAttribute("hotelNameList", hotelList);
         }
@@ -124,6 +179,8 @@ public class HotelController extends HttpServlet {
             request.getRequestDispatcher(response.encodeURL(RESULT_PAGE));
         view.forward(request, response);
     }
+    
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

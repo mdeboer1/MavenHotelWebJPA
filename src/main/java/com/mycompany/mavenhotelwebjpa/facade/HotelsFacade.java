@@ -35,6 +35,15 @@ public class HotelsFacade extends AbstractFacade<Hotels> {
         super(Hotels.class);
     }
     
+//    public Integer findHighestHotelId(){
+////        CriteriaBuilder builder = getEntityManager().getCriteriaBuilder();
+////        CriteriaQuery<Hotels> criteriaQuery = builder.createQuery(Hotels.class);
+////        Root<Hotels> hotel = criteriaQuery.from(Hotels.class);
+////
+////        criteriaQuery.where(hotel.equals(hotel.get("hotel_id"), hotelId));
+//        return (Integer)em.createQuery("select max(hotels.hotel_id) from  hotel hotels").getSingleResult();
+//    }
+    
     // select * from hotel where city = ?"
     // select h from Hotel where h.city = ?1"
     public List<Hotels> findAllByColumnName(String searchKey) {
@@ -50,10 +59,17 @@ public class HotelsFacade extends AbstractFacade<Hotels> {
         List<Hotels> hotels = q.getResultList();
         
         if(hotels.isEmpty()) {
+            
+            criteriaQuery.where(builder.like(hotel.get(Hotels_.hotelAddress),searchKey));
+            q = getEntityManager().createQuery(criteriaQuery);
+            hotels = q.getResultList();
+            
+            if (hotels.isEmpty()){
 
             criteriaQuery.where(builder.like(hotel.get(Hotels_.hotelCity),searchKey));
             q = getEntityManager().createQuery(criteriaQuery);
             hotels = q.getResultList();
+            }
             
             if (hotels.isEmpty()){
                 criteriaQuery.where(builder.like(hotel.get(Hotels_.hotelState),searchKey));
