@@ -46,9 +46,7 @@ public class HotelController extends HttpServlet {
         List<Hotels> hotelList = new ArrayList<>();
         String edit = request.getParameter("editHotel");
         String delete = request.getParameter("deleteHotel");
-        List<Hotels> listOfNewHotels = new ArrayList<>();
         String addHotel = request.getParameter("addToList");
-        String submitList = request.getParameter("submitToDb");
         String newHotelName = request.getParameter("editName");
         String newHotelAddress = request.getParameter("editAddress");
         String newHotelCity = request.getParameter("editCity");
@@ -119,8 +117,6 @@ public class HotelController extends HttpServlet {
 //
 //            }
 //        }
-        
-        
 
         if (null == session.getAttribute("hotelNameList")){
             hotelList = hotelsFacade.findAll();
