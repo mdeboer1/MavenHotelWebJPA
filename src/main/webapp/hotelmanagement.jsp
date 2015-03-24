@@ -106,10 +106,10 @@
                             <legend>Enter the information to add hotels</legend>
                                 <input id="addName" name="addName" type="text" class="form-control" placeholder="Enter hotel name"><br>
                                 <input id="addAddress" name="addAddress" type="text" class="form-control" placeholder="Enter hotel address"><br>
-                                <input id="addtCity"  name="addCity" type="text" class="form-control" placeholder="Enter hotel city"><br>
+                                <input id="addCity"  name="addCity" type="text" class="form-control" placeholder="Enter hotel city"><br>
                                 <input id="addState" name="addState" type="text" class="form-control" placeholder="Enter hotel state"><br>
                                 <input id="addZip" name="addZip"  type="text" class="form-control" placeholder="Enter hotel zip code"><br>
-                                <button id="addToList" name="addToList" class="btn btn-default" type="submit">Add hotel</button>
+                                <button id="add" name="add" class="btn btn-default" type="submit">Add hotel</button>
                         </fieldset>
                     </form>
                 </div>    
