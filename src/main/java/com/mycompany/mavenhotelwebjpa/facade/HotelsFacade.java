@@ -16,6 +16,8 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -25,7 +27,9 @@ import javax.persistence.criteria.Root;
 public class HotelsFacade extends AbstractFacade<Hotels> {
     @PersistenceContext(unitName = "hotelPU")
     private EntityManager em;
-
+    private static final Logger LOG = 
+            LoggerFactory.getLogger(HotelsFacade.class);
+    
     @Override
     protected EntityManager getEntityManager() {
         return em;
@@ -34,18 +38,7 @@ public class HotelsFacade extends AbstractFacade<Hotels> {
     public HotelsFacade() {
         super(Hotels.class);
     }
-    
-//    public Integer findHighestHotelId(){
-////        CriteriaBuilder builder = getEntityManager().getCriteriaBuilder();
-////        CriteriaQuery<Hotels> criteriaQuery = builder.createQuery(Hotels.class);
-////        Root<Hotels> hotel = criteriaQuery.from(Hotels.class);
-////
-////        criteriaQuery.where(hotel.equals(hotel.get("hotel_id"), hotelId));
-//        return (Integer)em.createQuery("select max(hotels.hotel_id) from  hotel hotels").getSingleResult();
-//    }
-    
-    // select * from hotel where city = ?"
-    // select h from Hotel where h.city = ?1"
+
     public List<Hotels> findAllByColumnName(String searchKey) {
 
         searchKey = new StringBuilder("%").append(searchKey).append("%").toString();
