@@ -77,7 +77,7 @@ public class HotelsFacade extends AbstractFacade<Hotels> {
                 hotels = q.getResultList();
             }
         
-        
+        LOG.debug("Here is your list.");
         return hotels;
     
     }
