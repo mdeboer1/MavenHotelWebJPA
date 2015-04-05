@@ -67,7 +67,7 @@ public class HotelController extends HttpServlet {
         String editHotelCity = request.getParameter("editCity");
         String editHotelState = request.getParameter("editState");
         String editHotelZip = request.getParameter("editZip");
-        
+        String action = request.getParameter("list");
         // This section is for the Lookup Wizard        
         if (filter != null){
             String columnName = null;

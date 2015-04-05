@@ -10,6 +10,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="x" 
            uri="http://java.sun.com/jsp/jstl/xml"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%
     Object object = request.getAttribute("hotelNameList");
     if (object == null){
@@ -23,7 +24,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="css/management.css">
+        <link href="css/management.css" rel="stylesheet" type="text/css"/>
         <title>Hotel Management System></title>
     </head>
     <body>
@@ -112,7 +113,11 @@
                                 <button id="add" name="add" class="btn btn-default" type="submit">Add hotel</button>
                         </fieldset>
                     </form>
-                </div>    
+                </div> 
+                <sec:authorize ifAnyGranted="ROLE_ADMIN,ROLE_USER">
+                    Logged in as: <sec:authentication property="principal.username"></sec:authentication> ::
+                    <a href='<%= this.getServletContext().getContextPath() + "/j_spring_security_logout"%>'>Log Me Out</a>
+                </sec:authorize>        
             </div>
         </div>
          <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>            

@@ -21,6 +21,7 @@
         var $addState = $('#addState');
         var $addZip = $('#addZip');
         var baseUrl = "control";
+        var $filter = $('#filter');
         // vars to represent the wizard look up too
         
         // Get all hotels for list in jsp
@@ -41,5 +42,8 @@
             });
         }
         
+        function handleError(xhr, status, error) {
+            alert("Sorry, there was a problem: " + error);
+        }
     });
 });
