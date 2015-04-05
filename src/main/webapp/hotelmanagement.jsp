@@ -98,8 +98,10 @@
                                     <input id="editCity"  name="editCity" type="text" class="form-control" placeholder="Edit hotel city" value="${hotelToEdit.hotelCity}"><br>
                                     <input id="editState" name="editState" type="text" class="form-control" placeholder="Edit hotel state" value="${hotelToEdit.hotelState}"><br>
                                     <input id="editZip" name="editZip"  type="text" class="form-control" placeholder="Edit hotel zip code" value="${hotelToEdit.hotelZip}"><br>
-                                    <button id="editHotel" name="editHotel" class="btn btn-default" type="submit">Edit hotel</button>
-                                    <button id="deleteHotel" name="deleteHotel" class="btn btn-default" type="submit">Delete Hotel</button>
+                                    <sec:authorize ifAnyGranted="ROLE_ADMIN">
+                                        <button id="editHotel" name="editHotel" class="btn btn-default" type="submit">Edit hotel</button>
+                                        <button id="deleteHotel" name="deleteHotel" class="btn btn-default" type="submit">Delete Hotel</button>
+                                    </sec:authorize>
                             </fieldset>
                         </div>
                     </form>
@@ -114,7 +116,9 @@
                                 <input id="addCity"  name="addCity" type="text" class="form-control" placeholder="Enter hotel city"><br>
                                 <input id="addState" name="addState" type="text" class="form-control" placeholder="Enter hotel state"><br>
                                 <input id="addZip" name="addZip"  type="text" class="form-control" placeholder="Enter hotel zip code"><br>
-                                <button id="add" name="add" class="btn btn-default" type="submit">Add hotel</button>
+                                <sec:authorize ifAnyGranted="ROLE_ADMIN">
+                                    <button id="add" name="add" class="btn btn-default" type="submit">Add hotel</button>
+                                </sec:authorize>
                         </fieldset>
                     </form>
                 </div> 
