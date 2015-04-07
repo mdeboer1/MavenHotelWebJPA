@@ -46,22 +46,29 @@
                            access="isAnonymous()" requires-channel="https"/>
         <sec:intercept-url pattern="/loginerror.jsp*" 
                            access="isAnonymous()" requires-channel="https"/>
+        <sec:intercept-url pattern="/home.jsp*" 
+                           access="isAnonymous()" requires-channel="https"/>
         <sec:intercept-url 
-            pattern="/**" 
+            pattern="/hotellookup.jsp" 
             access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')" requires-channel="https" />
+        <sec:intercept-url 
+            pattern="/hotelmanagement.jsp" 
+            access="hasAnyRole('ROLE_ADMIN')" requires-channel="https" />
     
         <!-- Use custom form for login -->
+        <!--Lines  58 & 59 can be removed, if admin and user roles go to different pages
+            Extra code would be needed, see April 7th notes and text file provided
+            on Spring security -->
         <sec:form-login 
             login-processing-url="/j_spring_security_check"
             login-page="/login.jsp" 
-            default-target-url="/hotelmanagement.jsp"
-            always-use-default-target="true"
+            authentication-success-handler-ref="myAuthenticationHandler"
             authentication-failure-url="/loginerror.jsp"/>
             
         <sec:logout logout-url="/j_spring_security_logout" 
                     invalidate-session="true" 
                     delete-cookies="JSESSIONID"
-                    logout-success-url="/login.jsp" />
+                    logout-success-url="/home.jsp" />
 
     </sec:http>
 
@@ -79,6 +86,9 @@
         <constructor-arg value="512" />
         <property name="iterations" value="1024"/>
     </bean>
+    
+    <!--This is used to direct the admin or user to the correct page -->        
+    <bean id="myAuthenticationHandler" class="com.mycompany.mavenhotelwebjpa.util.MyAuthenticationHandler" />
         
     <!-- (Optional) Automatically receives and logs AuthenticationEvent messages -->
     <bean id="loggerListener" class="org.springframework.security.authentication.event.LoggerListener"/>
