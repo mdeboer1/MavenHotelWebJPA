@@ -5,14 +5,16 @@
  */
 package com.mycompany.mavenhotelwebjpa.controller;
 
-import com.mycompany.mavenhotelwebjpa.facade.HotelsFacade;
 import com.mycompany.mavenhotelwebjpa.entity.Hotels;
+import com.mycompany.mavenhotelwebjpa.facade.HotelsFacade;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,12 +24,14 @@ import javax.servlet.http.HttpSession;
  *
  * @author mdeboer1
  */
+//@WebServlet(name = "HotelLookupController", urlPatterns = {"/LookupController"})
+public class HotelLookupController extends HttpServlet {
 
-public class HotelController extends HttpServlet {
-    private static final String RESULT_PAGE = "/hotelmanagement.jsp"; 
-
+    private static final String RESULT_PAGE = "/hotellookup.jsp";
+    
     @EJB
     private HotelsFacade hotelsFacade;
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -41,18 +45,6 @@ public class HotelController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        
-        // Create a list to fill the hotel list
-        List<Hotels> hotelList = new ArrayList<>();
-        String edit = request.getParameter("editHotel");
-        String delete = request.getParameter("deleteHotel");
-        String addHotel = request.getParameter("add");
-        String newHotelName = request.getParameter("addName");
-        String newHotelAddress = request.getParameter("addAddress");
-        String newHotelCity = request.getParameter("addCity");
-        String newHotelState = request.getParameter("addState");
-        String newHotelZip = request.getParameter("addZip");
-        
         HttpSession session = request.getSession();
         String filter = request.getParameter("filter");
         String hotelName = request.getParameter("byName");
@@ -61,14 +53,8 @@ public class HotelController extends HttpServlet {
         String hotelState = request.getParameter("byState");
         String hotelZip = request.getParameter("byZip");
         String allHotels = request.getParameter("allHotels");
-        HttpSession session1 = request.getSession();
-        String editHotelName = request.getParameter("editName");
-        String editHotelAddress = request.getParameter("editAddress");
-        String editHotelCity = request.getParameter("editCity");
-        String editHotelState = request.getParameter("editState");
-        String editHotelZip = request.getParameter("editZip");
-        String action = request.getParameter("list");
-        // This section is for the Lookup Wizard        
+        List<Hotels> hotelList = new ArrayList<>();        
+        
         if (filter != null){
             String columnName = null;
             //String propertyName = null;
@@ -91,89 +77,13 @@ public class HotelController extends HttpServlet {
                 columnName = request.getParameter("byZip");
            }
             if (allHotels == null){
-                //columnName = "h." + columnName;
                 hotelList = hotelsFacade.findAllByColumnName(columnName);
             }
             request.setAttribute("hotelNameList", hotelList);
-            session1.setAttribute("hotelNameList", hotelList);
+            session.setAttribute("hotelNameList", hotelList);
         } 
-        
-//        String[] query = request.getParameterValues("id");
-//        int id;
-//        Hotels hotel = null;
-//        
-//        if (query != null){
-//            try {
-//                id = Integer.parseInt(query[0]);
-//                String propertyName = id +"";
-//                hotelList = hotelsFacade.findAllByColumnName(propertyName);
-//                for(Hotels h : hotelList){
-//                    if (id == h.getHotelId()){
-//                        hotel = h;
-//                    }
-//                }
-//                request.setAttribute("hotelToEdit", hotel);
-//            } catch (NumberFormatException e){
-//
-//            }
-//        }
 
         if (null == session.getAttribute("hotelNameList")){
-            hotelList = hotelsFacade.findAll();
-            request.setAttribute("hotelNameList", hotelList);
-        }
-        
-        String[] query = request.getParameterValues("id");
-        Hotels hotel = null;
-        
-        if (query != null){
-            try {
-                int id = Integer.parseInt(query[0]);
-                for(Hotels h : hotelList){
-                    if (id == h.getHotelId()){
-                        hotel = h;
-                    }
-                }
-                request.setAttribute("hotelToEdit", hotel);
-            } catch (NumberFormatException e){
-
-            }
-        }
-        
-        if (edit != null){
-            try{
-                int hotelId = Integer.parseInt(request.getParameter("hotelId"));
-                hotel = new Hotels(hotelId, editHotelName, editHotelAddress, editHotelCity,
-                    editHotelState, editHotelZip);
-            }catch (NullPointerException | NumberFormatException e){
-                
-            }
-            hotelsFacade.edit(hotel);
-            hotelList = hotelsFacade.findAll();
-            request.setAttribute("hotelNameList", hotelList);
-        }
-        
-        if (delete != null){
-            try{
-                int hotelId = Integer.parseInt(request.getParameter("hotelId"));
-                hotel = new Hotels(hotelId, editHotelName, editHotelAddress, editHotelCity,
-                    editHotelState, editHotelZip);
-            }catch (NullPointerException | NumberFormatException e){
-                
-            }
-            hotelsFacade.remove(hotel);
-            hotelList = hotelsFacade.findAll();
-            request.setAttribute("hotelNameList", hotelList);
-        }
-        
-        if (addHotel != null){
-            try{
-                hotel = new Hotels(1, newHotelName, newHotelAddress, newHotelCity,
-                    newHotelState, newHotelZip);
-            }catch (NullPointerException e){
-                
-            }
-            hotelsFacade.create(hotel);
             hotelList = hotelsFacade.findAll();
             request.setAttribute("hotelNameList", hotelList);
         }
@@ -181,9 +91,8 @@ public class HotelController extends HttpServlet {
         RequestDispatcher view =
             request.getRequestDispatcher(response.encodeURL(RESULT_PAGE));
         view.forward(request, response);
+        
     }
-    
-    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

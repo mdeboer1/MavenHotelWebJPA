@@ -44,10 +44,8 @@
                         <button id="filter" name="filter" class="btn btn-default" type="submit">Filter hotels</button><br><br>
                         <input type="checkbox" id="allHotels" name="allHotels">
                         <label for="allHotels">Select All Hotels</label><br>
-                        <sec:authorize ifAnyGranted="ROLE_ADMIN">
-                            Logged in as: <sec:authentication property="principal.username"></sec:authentication> ::
-                            <a href='<%= this.getServletContext().getContextPath() + "/j_spring_security_logout"%>'>Log Me Out</a>
-                        </sec:authorize>  
+                        Logged in as: <sec:authentication property="principal.username"></sec:authentication> ::
+                        <a href='<%= this.getServletContext().getContextPath() + "/j_spring_security_logout"%>'>Log Me Out</a>
                     </fieldset>
                 </div>
             </form><br><br>

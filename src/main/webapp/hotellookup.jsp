@@ -14,7 +14,7 @@
 <%
     Object object = request.getAttribute("hotelNameList");
     if (object == null){
-        response.sendRedirect("control");
+        response.sendRedirect("lookupcontroller");
     }
     %>
 <!DOCTYPE html>
@@ -30,10 +30,27 @@
     <body>
         <h1>Welcome to the hotel lookup system</h1>
         <div id="container"><br>
+            <form class="form-inline">    
+                <div id="lookupWizard">
+                    <fieldset>
+                        <legend>Filter Hotels</legend>
+                        <input id="byName" name="byName" type="text" class="form-control" placeholder="Look up by name">
+                        <input id="byAddress" name="byAddress" type="text" class="form-control" placeholder="Look up by address">
+                        <input id="byCity" name="byCity" type="text" class="form-control" placeholder="Look up by city">
+                        <input id="byState" name="byState" type="text" class="form-control" placeholder="Look up by state">
+                        <input id="byZip" name="byZip" type="text" class="form-control" placeholder="Look up by zip code">
+                        <button id="filter" name="filter" class="btn btn-default" type="submit">Filter hotels</button><br><br>
+                        <input type="checkbox" id="allHotels" name="allHotels">
+                        <label for="allHotels">Select All Hotels</label><br>
+                        Logged in as: <sec:authentication property="principal.username"></sec:authentication> ::
+                        <a href='<%= this.getServletContext().getContextPath() + "/j_spring_security_logout"%>'>Log Me Out</a>
+                    </fieldset>
+                </div>
+            </form><br><br>
             <div class="row">
                 <div id="fullHotelList">
                     <form id="hotels" name="hotels" method="POST" action='<%= 
-                    response.encodeURL("control")%>'>
+                    response.encodeURL("lookupcontroller")%>'>
                         <div class="col-md-12">
                             <fieldset>
                                 <legend>Hotel List</legend>

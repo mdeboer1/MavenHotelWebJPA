@@ -24,23 +24,28 @@
         <param-name>db.password</param-name>
         <param-value>admin</param-value>
     </context-param>
-    
     <servlet>
         <servlet-name>hotelcontroller</servlet-name>
-        <servlet-class>com.mycompany.mavenhotelwebjpa.controller.HotelController</servlet-class>
+        <servlet-class>com.mycompany.mavenhotelwebjpa.controller.HotelManagementController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>hotelcontroller</servlet-name>
         <url-pattern>/control</url-pattern>
     </servlet-mapping>
-    
+    <servlet>
+        <servlet-name>lookupcontroller</servlet-name>
+        <servlet-class>com.mycompany.mavenhotelwebjpa.controller.HotelLookupController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>lookupcontroller</servlet-name>
+        <url-pattern>/lookupcontroller</url-pattern>
+    </servlet-mapping>
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
     <listener>
         <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
     </listener>
-
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath:applicationContext.xml</param-value>
@@ -53,14 +58,11 @@
         <filter-name>springSecurityFilterChain</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-    
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
-
-
     <welcome-file-list>
         <welcome-file>home.jsp</welcome-file>
     </welcome-file-list>
