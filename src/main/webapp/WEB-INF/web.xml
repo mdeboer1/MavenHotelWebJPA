@@ -40,6 +40,14 @@
         <servlet-name>lookupcontroller</servlet-name>
         <url-pattern>/lookupcontroller</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>registrationcontroller</servlet-name>
+        <servlet-class>com.mycompany.mavenhotelwebjpa.controller.UserRegistrationController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>registrationcontroller</servlet-name>
+        <url-pattern>/registrationcontroller</url-pattern>
+    </servlet-mapping>
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>

@@ -21,21 +21,25 @@
         </header>
         <div id="container">
             <div id="userInfo" class="col-md-6">
-                <label for="firstName">First Name</label>
-                <input id="firstName" name="firstName" type="text" class="form-control">
-                <label for="lastName">Last Name</label>
-                <input id="lastName" name="lasttName" type="text" class="form-control">
-                <label for="address">Address</label>
-                <input id="address" name="address" type="text" class="form-control">
-                <label for="city">City</label>
-                <input id="city" name="city" type="text" class="form-control">
-                <label for="state">State</label>
-                <input id="state" name="state" type="text" class="form-control">
-                <label for="zipCode">Zip Code</label>
-                <input id="zipCode" name="zipCode" type="text" class="form-control">
-                <label for="email">Email</label>
-                <input id="email" name="email" type="text" class="form-control"><br>
-                <button id ="register" name="register" class="btn btn-default" type="submit">Submit</button>
+                <form id="userInteractionPanel" name="userInteractionPanel" 
+                          method="POST" action='<%= 
+                                  response.encodeURL("registrationcontroller")%>'>
+                    <label for="firstName">First Name</label>
+                    <input id="firstName" name="firstName" type="text" class="form-control">
+                    <label for="lastName">Last Name</label>
+                    <input id="lastName" name="lasttName" type="text" class="form-control">
+                    <label for="address">Address</label>
+                    <input id="address" name="address" type="text" class="form-control">
+                    <label for="city">City</label>
+                    <input id="city" name="city" type="text" class="form-control">
+                    <label for="state">State</label>
+                    <input id="state" name="state" type="text" class="form-control">
+                    <label for="zipCode">Zip Code</label>
+                    <input id="zipCode" name="zipCode" type="text" class="form-control">
+                    <label for="email">Email</label>
+                    <input id="email" name="email" type="text" class="form-control"><br>
+                    <button id ="register" name="register" class="btn btn-default" type="submit">Submit</button>
+                </form>
             </div>
         </div>    
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>            
