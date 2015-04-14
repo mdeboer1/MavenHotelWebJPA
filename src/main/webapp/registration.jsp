@@ -24,7 +24,7 @@
                 <form id="userInteractionPanel" name="userInteractionPanel" 
                           method="POST" action='<%= 
                                   response.encodeURL("registrationcontroller")%>'>
-                    <label for="firstName">First Name</label>
+                    <!--label for="firstName">First Name</label>
                     <input id="firstName" name="firstName" type="text" class="form-control">
                     <label for="lastName">Last Name</label>
                     <input id="lastName" name="lasttName" type="text" class="form-control">
@@ -35,9 +35,11 @@
                     <label for="state">State</label>
                     <input id="state" name="state" type="text" class="form-control">
                     <label for="zipCode">Zip Code</label>
-                    <input id="zipCode" name="zipCode" type="text" class="form-control">
+                    <input id="zipCode" name="zipCode" type="text" class="form-control"-->
                     <label for="email">Email</label>
                     <input id="email" name="email" type="text" class="form-control"><br>
+                    <label for="password">Password</label>
+                    <input id="password" name="password" type="text" class="form-control"><br>
                     <button id ="register" name="register" class="btn btn-default" type="submit">Submit</button>
                 </form>
             </div>

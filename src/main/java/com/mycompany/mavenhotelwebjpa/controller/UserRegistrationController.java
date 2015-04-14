@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,17 +29,19 @@ import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 
 public class UserRegistrationController extends HttpServlet {
     
-    private static final String RESULT_PAGE = "/hotelmanagement.jsp"; 
+    private static final String RESULT_PAGE = "/registrationresult.jsp"; 
     private Users user;
-    private final String FIRST_NAME = "firstName";
-    private final String LAST_NAME = "lastName";
-    private final String ADDRESS = "address";
-    private final String CITY = "city";
-    private final String STATE = "state";
-    private final String ZIP_CODE = "zipCode";
+//    private final String FIRST_NAME = "firstName";
+//    private final String LAST_NAME = "lastName";
+//    private final String ADDRESS = "address";
+//    private final String CITY = "city";
+//    private final String STATE = "state";
+//    private final String ZIP_CODE = "zipCode";
     private final String EMAIL = "EMAIL";
     private final String PASSWORD = "password";
+    private final String REGISTRATION_RESULT = "registrationResult";
     private EmailVerificationSender emailService;
+    private String registrationResult;
     
     @EJB
     private UsersFacade userFacade;
@@ -58,6 +61,10 @@ public class UserRegistrationController extends HttpServlet {
         String userName = request.getParameter(EMAIL);
         String password = request.getParameter(PASSWORD);
         saveNewRegistation(userName, password);
+        request.setAttribute(REGISTRATION_RESULT, registrationResult);
+        RequestDispatcher view =
+            request.getRequestDispatcher(response.encodeURL(RESULT_PAGE));
+        view.forward(request, response);
     }
 
     private void saveNewRegistation(String userName, String password) {
@@ -80,13 +87,18 @@ public class UserRegistrationController extends HttpServlet {
 	       try {
 	            // you need an email service class
 	            emailService.sendEmail(user.getUserName(), null);
-		    
+		    registrationResult = "Please log in to the email address"
+                            + "that you provided during registration for a"
+                            + " varification email to finalize ths process.  "
+                            + "Thank you!";
 	       } catch (MailException ex) {
-	            throw new RuntimeException("Sorry, the verification email could not be "
+	            throw new RuntimeException(registrationResult = 
+                                "Sorry, the verification email could not be "
 	                           + "sent. Please notify the webmaster at "
 	                           + "webmaster@gmail.com and we'll complete the "
 	                           + "process for you. Thanks for your patience.");
                }
+               
        }
        
        /*
