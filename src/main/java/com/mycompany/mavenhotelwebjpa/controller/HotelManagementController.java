@@ -10,7 +10,7 @@ import com.mycompany.mavenhotelwebjpa.entity.Hotels;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.ejb.EJB;
+import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -26,7 +26,7 @@ import javax.servlet.http.HttpSession;
 public class HotelManagementController extends HttpServlet {
     private static final String RESULT_PAGE = "/hotelmanagement.jsp"; 
 
-    @EJB
+    @Inject
     private HotelsFacade hotelsFacade;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -98,26 +98,6 @@ public class HotelManagementController extends HttpServlet {
             session1.setAttribute("hotelNameList", hotelList);
         } 
         
-//        String[] query = request.getParameterValues("id");
-//        int id;
-//        Hotels hotel = null;
-//        
-//        if (query != null){
-//            try {
-//                id = Integer.parseInt(query[0]);
-//                String propertyName = id +"";
-//                hotelList = hotelsFacade.findAllByColumnName(propertyName);
-//                for(Hotels h : hotelList){
-//                    if (id == h.getHotelId()){
-//                        hotel = h;
-//                    }
-//                }
-//                request.setAttribute("hotelToEdit", hotel);
-//            } catch (NumberFormatException e){
-//
-//            }
-//        }
-
         if (null == session.getAttribute("hotelNameList")){
             hotelList = hotelsFacade.findAll();
             request.setAttribute("hotelNameList", hotelList);
