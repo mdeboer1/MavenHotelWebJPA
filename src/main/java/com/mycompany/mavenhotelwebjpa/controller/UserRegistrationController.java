@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -43,7 +44,7 @@ public class UserRegistrationController extends HttpServlet {
     private EmailVerificationSender emailService;
     private String registrationResult;
     
-    @EJB
+    @Inject
     private UsersFacade userFacade;
     
     /**
@@ -79,7 +80,7 @@ public class UserRegistrationController extends HttpServlet {
 	       auth.setAuthority("ROLE_USER"); // or, use any role you want
 	       auths.add(auth);
 	       user.setAuthoritiesCollection(auths);
-	       auth.setUsername(user.getUserName());
+	       auth.setUsername(user);
 
                userFacade = new UsersFacade();
 	       userFacade.create(user); // you need a UserService (UserFacade)
