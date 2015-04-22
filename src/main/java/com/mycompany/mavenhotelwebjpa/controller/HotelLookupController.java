@@ -8,13 +8,11 @@ package com.mycompany.mavenhotelwebjpa.controller;
 import com.mycompany.mavenhotelwebjpa.entity.Hotels;
 import com.mycompany.mavenhotelwebjpa.facade.HotelsFacade;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
-import javax.ejb.EJB;
+import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,7 +27,7 @@ public class HotelLookupController extends HttpServlet {
 
     private static final String RESULT_PAGE = "/hotellookup.jsp";
     
-    @EJB
+    @Inject
     private HotelsFacade hotelsFacade;
     
     /**

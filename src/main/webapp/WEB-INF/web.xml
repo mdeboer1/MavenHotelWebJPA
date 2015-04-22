@@ -48,6 +48,14 @@
         <servlet-name>registrationcontroller</servlet-name>
         <url-pattern>/registrationcontroller</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>RegistrationVerifier</servlet-name>
+        <servlet-class>com.mycompany.mavenhotelwebjpa.controller.RegistrationVerifierController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RegistrationVerifier</servlet-name>
+        <url-pattern>/verifier</url-pattern>
+    </servlet-mapping>
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>

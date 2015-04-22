@@ -46,7 +46,7 @@ public class Authorities implements Serializable {
     private Integer authoritiesId;
     @JoinColumn(name = "username", referencedColumnName = "username")
     @ManyToOne(optional = false)
-    private String username;
+    private Users username;
 
     public Authorities() {
     }
@@ -76,12 +76,12 @@ public class Authorities implements Serializable {
         this.authoritiesId = authoritiesId;
     }
 
-    public String getUsername() {
+    public Users getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUsername(Users userName) {
+        this.username = userName;
     }
 
     @Override
