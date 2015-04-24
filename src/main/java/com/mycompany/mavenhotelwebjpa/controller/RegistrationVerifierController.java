@@ -9,7 +9,6 @@ import com.mycompany.mavenhotelwebjpa.entity.Users;
 import com.mycompany.mavenhotelwebjpa.facade.UsersFacade;
 import com.mycompany.mavenhotelwebjpa.util.EmailVerificationSender;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Date;
 import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
@@ -57,21 +56,23 @@ private static final long serialVersionUID = 1L;
             byte[] decoded = Base64.decode(id.getBytes());
             String username = new String(decoded);
             
-            Users user = userSrv.findByUsername(username);
+            Users user = userFacade.find(username);
             if(user == null) {
                 throw new RuntimeException("Sorry, that user is not in our system");
             }
             user.setEnabled(true);
-            user.setDateVerified(new Date());
-            userSrv.saveAndFlush(user);
-                        
+            userFacade.edit(user);
+//            user.setDateVerified(new Date());
+//            user.saveAndFlush(user);
+            String message = "You have been successfully registered.  Please click"
+                    + "on the login link below to navigate to the login screen";
+            request.setAttribute("success", message);
         } catch(Exception dae) {
             errMsg = "VERIFICATION ERROR: " + dae.getLocalizedMessage();
             request.setAttribute("errMsg", errMsg);
             destination = "/verificationError.jsp";
         }
-        
-                    
+           
         RequestDispatcher dispatcher =
                     getServletContext().getRequestDispatcher(destination);
                 dispatcher.forward(request, response);     

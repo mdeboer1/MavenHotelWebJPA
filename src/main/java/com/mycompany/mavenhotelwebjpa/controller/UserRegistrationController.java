@@ -36,7 +36,7 @@ public class UserRegistrationController extends HttpServlet {
 //    private final String CITY = "city";
 //    private final String STATE = "state";
 //    private final String ZIP_CODE = "zipCode";
-    private final String EMAIL = "EMAIL";
+    private final String EMAIL = "email";
     private final String PASSWORD = "password";
     private final String REGISTRATION_RESULT = "registrationResult";
     private EmailVerificationSender emailService;

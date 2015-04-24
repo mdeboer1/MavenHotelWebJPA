@@ -6,16 +6,12 @@
 package com.mycompany.mavenhotelwebjpa.util;
 
 import java.io.Serializable;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.mail.MailException;
 import org.springframework.mail.MailSendException;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.crypto.codec.Base64;
-import org.springframework.stereotype.Service;
 import javax.ejb.Stateless;
 import javax.interceptor.Interceptors;
 import org.springframework.ejb.interceptor.SpringBeanAutowiringInterceptor;

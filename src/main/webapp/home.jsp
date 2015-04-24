@@ -15,6 +15,6 @@
         <h1>Welcome to Home Page</h1>
         <p><a href="hotellookup.jsp">Hotel Lookup</a></p>
         <p><a href="hotelmanagement.jsp">Hotel Management</a></p>
-        <p><a href="registration.jsp">Hotel Management</a></p>
+        <p><a href="registration.jsp">Create an account</a></p>
     </body>
 </html>

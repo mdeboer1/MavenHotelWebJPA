@@ -28,4 +28,7 @@ public class UsersFacade extends AbstractFacade<Users> {
         super(Users.class);
     }
     
+//    public Users findByUsername(String userName){
+//        
+//    }
 }
