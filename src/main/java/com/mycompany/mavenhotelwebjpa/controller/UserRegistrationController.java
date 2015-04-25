@@ -7,6 +7,7 @@ package com.mycompany.mavenhotelwebjpa.controller;
 
 import com.mycompany.mavenhotelwebjpa.entity.Authorities;
 import com.mycompany.mavenhotelwebjpa.entity.Users;
+import com.mycompany.mavenhotelwebjpa.facade.AuthoritiesFacade;
 import com.mycompany.mavenhotelwebjpa.facade.UsersFacade;
 import com.mycompany.mavenhotelwebjpa.util.EmailVerificationSender;
 import java.io.IOException;
@@ -30,6 +31,7 @@ public class UserRegistrationController extends HttpServlet {
     
     private static final String RESULT_PAGE = "/registrationresult.jsp"; 
     private Users user;
+    private static int authId;
 //    private final String FIRST_NAME = "firstName";
 //    private final String LAST_NAME = "lastName";
 //    private final String ADDRESS = "address";
@@ -44,6 +46,8 @@ public class UserRegistrationController extends HttpServlet {
     
     @Inject
     private UsersFacade userFacade;
+    @Inject
+    private AuthoritiesFacade authFacade;
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -72,16 +76,20 @@ public class UserRegistrationController extends HttpServlet {
 	       user.setUserName(userName);
 	       user.setPassword(encodeSha512(password,userName));
 	       user.setEnabled(false); // don't want enabled until email verified!
-	       
+//	       System.out.println(user.getUserName() + " " + user.getPassword());
 	       List<Authorities> auths = new ArrayList<>();
 	       Authorities auth = new Authorities();
+//               auth.setAuthoritiesId(5);
 	       auth.setAuthority("ROLE_USER"); // or, use any role you want
 	       auths.add(auth);
 	       user.setAuthoritiesCollection(auths);
 	       auth.setUsername(user);
 
                userFacade = new UsersFacade();
-	       userFacade.create(user); // you need a UserService (UserFacade)
+               authFacade = new AuthoritiesFacade();
+               userFacade.create(user);
+               authFacade.create(auth);
+	        // you need a UserService (UserFacade)
 	       
 	       try {
 	            // you need an email service class
