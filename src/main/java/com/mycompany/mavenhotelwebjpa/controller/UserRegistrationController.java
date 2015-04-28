@@ -30,14 +30,10 @@ import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 public class UserRegistrationController extends HttpServlet {
     
     private static final String RESULT_PAGE = "/registrationresult.jsp"; 
+//    @Inject
     private Users user;
-    private static int authId;
-//    private final String FIRST_NAME = "firstName";
-//    private final String LAST_NAME = "lastName";
-//    private final String ADDRESS = "address";
-//    private final String CITY = "city";
-//    private final String STATE = "state";
-//    private final String ZIP_CODE = "zipCode";
+//    @Inject
+    private Authorities auth;
     private final String EMAIL = "email";
     private final String PASSWORD = "password";
     private final String REGISTRATION_RESULT = "registrationResult";
@@ -46,8 +42,8 @@ public class UserRegistrationController extends HttpServlet {
     
     @Inject
     private UsersFacade userFacade;
-    @Inject
-    private AuthoritiesFacade authFacade;
+//    @Inject
+//    private AuthoritiesFacade authFacade;
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -78,17 +74,15 @@ public class UserRegistrationController extends HttpServlet {
 	       user.setEnabled(false); // don't want enabled until email verified!
 //	       System.out.println(user.getUserName() + " " + user.getPassword());
 	       List<Authorities> auths = new ArrayList<>();
-	       Authorities auth = new Authorities();
-//               auth.setAuthoritiesId(5);
+	       auth = new Authorities();
+               auth.setAuthoritiesId(0);
 	       auth.setAuthority("ROLE_USER"); // or, use any role you want
-	       auths.add(auth);
-	       user.setAuthoritiesCollection(auths);
 	       auth.setUsername(user);
+               auths.add(auth);
+	       user.setAuthoritiesCollection(auths);
 
-               userFacade = new UsersFacade();
-               authFacade = new AuthoritiesFacade();
                userFacade.create(user);
-               authFacade.create(auth);
+//               authFacade.create(auth);
 	        // you need a UserService (UserFacade)
 	       
 	       try {
