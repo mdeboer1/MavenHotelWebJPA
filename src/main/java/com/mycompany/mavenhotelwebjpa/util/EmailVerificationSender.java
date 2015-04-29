@@ -33,21 +33,19 @@ import org.springframework.ejb.interceptor.SpringBeanAutowiringInterceptor;
         * base64 encoded username is generated to hide details of the key used
         * by the servlet to identify the user.
         * 
-        * @param user - the candidate member who is the target of the email
+     * @param userEmail
         */
-        public void sendEmail(String userEmail, Object data) throws MailException {
+        public void sendEmail(String userEmail) throws MailException {
            // Create a Base64 encode of the username
            byte[] encoded = Base64.encode(userEmail.getBytes()); 
            String base64Username = new String(encoded);
-        
+           
            // Create a thread safe "copy" of the template message and customize it
            // See Spring config in applicationContext.xml
            SimpleMailMessage msg = new SimpleMailMessage(this.templateMessage);
            msg.setTo(userEmail);
 
-           msg.setText("Thank you for registering with bitBay(tm), the unique "
-                   + "auction site that benefits WCTC's IT student club. This email is "
-                   + "being sent to you to verify your intent to join bitBay. "
+           msg.setText("Thank you for registering with Hotel Management Application."
                    + "To complete the registration process for user email [" 
                    + userEmail + "], please click on the link below."
                    + "\n\nCAUTION: if you did not register with bitBay, somebody "
@@ -55,7 +53,7 @@ import org.springframework.ejb.interceptor.SpringBeanAutowiringInterceptor;
                    + "do not click on the link below unless you intend to confirm "
                    + "your registraiton with bitBay.\n\n"
                    + "Here's the link to complete the registraiton process: \n\n"
-                   + "http://localhost:8080/bitbay/regVerify.do?id=" + base64Username); // change the URL to match your app
+                   + "http://localhost:8080/MavenHotelWebJPA/verifier?id=" + base64Username); // change the URL to match your app
         
            try {
                mailSender.send(msg);

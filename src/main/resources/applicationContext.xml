@@ -26,7 +26,7 @@
 ">
     
     <context:property-placeholder location="file:/emailcredentials.properties"/>
-    
+     <!--context:property-placeholder location="file:C:\emailcredentials.properties"/>-->
     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
         <property name="host" value="smtp.gmail.com"/>
         <property name="username" value="${mail.username}"/>

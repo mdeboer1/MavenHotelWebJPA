@@ -7,7 +7,6 @@ package com.mycompany.mavenhotelwebjpa.controller;
 
 import com.mycompany.mavenhotelwebjpa.entity.Authorities;
 import com.mycompany.mavenhotelwebjpa.entity.Users;
-import com.mycompany.mavenhotelwebjpa.facade.AuthoritiesFacade;
 import com.mycompany.mavenhotelwebjpa.facade.UsersFacade;
 import com.mycompany.mavenhotelwebjpa.util.EmailVerificationSender;
 import java.io.IOException;
@@ -30,6 +29,7 @@ import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 public class UserRegistrationController extends HttpServlet {
     
     private static final String RESULT_PAGE = "/registrationresult.jsp"; 
+    private static final long serialVersionUID = 1L;
 //    @Inject
     private Users user;
 //    @Inject
@@ -84,10 +84,10 @@ public class UserRegistrationController extends HttpServlet {
                userFacade.create(user);
 //               authFacade.create(auth);
 	        // you need a UserService (UserFacade)
-	       
+	       emailService = new EmailVerificationSender();
 	       try {
 	            // you need an email service class
-	            emailService.sendEmail(user.getUserName(), null);
+	            emailService.sendEmail(user.getUserName());
 		    registrationResult = "Please log in to the email address"
                             + "that you provided during registration for a"
                             + " varification email to finalize ths process.  "
