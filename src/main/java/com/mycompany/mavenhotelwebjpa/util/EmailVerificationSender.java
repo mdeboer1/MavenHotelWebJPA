@@ -33,9 +33,9 @@ import org.springframework.ejb.interceptor.SpringBeanAutowiringInterceptor;
         * base64 encoded username is generated to hide details of the key used
         * by the servlet to identify the user.
         * 
-     * @param userEmail
+        * @param userEmail
         */
-        public void sendEmail(String userEmail) throws MailException {
+        public void sendEmail(String userEmail, Object data) throws MailException {
            // Create a Base64 encode of the username
            byte[] encoded = Base64.encode(userEmail.getBytes()); 
            String base64Username = new String(encoded);

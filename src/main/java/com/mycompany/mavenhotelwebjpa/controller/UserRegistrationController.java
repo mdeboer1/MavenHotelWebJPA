@@ -30,9 +30,7 @@ public class UserRegistrationController extends HttpServlet {
     
     private static final String RESULT_PAGE = "/registrationresult.jsp"; 
     private static final long serialVersionUID = 1L;
-//    @Inject
     private Users user;
-//    @Inject
     private Authorities auth;
     private final String EMAIL = "email";
     private final String PASSWORD = "password";
@@ -87,7 +85,7 @@ public class UserRegistrationController extends HttpServlet {
 	       emailService = new EmailVerificationSender();
 	       try {
 	            // you need an email service class
-	            emailService.sendEmail(user.getUserName());
+	            emailService.sendEmail(user.getUserName() ,null);
 		    registrationResult = "Please log in to the email address"
                             + "that you provided during registration for a"
                             + " varification email to finalize ths process.  "
