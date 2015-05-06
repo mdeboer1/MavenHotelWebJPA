@@ -35,9 +35,10 @@ public class UserRegistrationController extends HttpServlet {
     private final String EMAIL = "email";
     private final String PASSWORD = "password";
     private final String REGISTRATION_RESULT = "registrationResult";
-    private EmailVerificationSender emailService;
     private String registrationResult;
     
+    @Inject
+    private EmailVerificationSender emailService;
     @Inject
     private UsersFacade userFacade;
 //    @Inject
@@ -82,7 +83,7 @@ public class UserRegistrationController extends HttpServlet {
                userFacade.create(user);
 //               authFacade.create(auth);
 	        // you need a UserService (UserFacade)
-	       emailService = new EmailVerificationSender();
+//	       emailService = new EmailVerificationSender();
 	       try {
 	            // you need an email service class
 	            emailService.sendEmail(user.getUserName() ,null);
